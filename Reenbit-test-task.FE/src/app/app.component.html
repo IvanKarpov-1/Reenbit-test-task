@@ -1,1 +1,5 @@
-<router-outlet />
+<app-sidebar [ngStyle]="{ 'width.px': sidebarWidth() }"></app-sidebar>
+
+<app-divider (resizeSidebar)="onResizeSidebar($event)"></app-divider>
+
+<app-main-content></app-main-content>
