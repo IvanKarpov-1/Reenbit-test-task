@@ -47,3 +47,6 @@ Reenbit-test-task.FE/.angular/cache
 Reenbit-test-task.BE/package-lock.json
 Reenbit-test-task.BE/pnpm-lock.yaml
 Reenbit-test-task.BE/yarn.lock
+
+# Environment variables
+.env
