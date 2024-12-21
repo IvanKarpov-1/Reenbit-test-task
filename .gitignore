@@ -1,0 +1,49 @@
+# Root-level ignored files
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
+yarn-error.log
+pnpm-debug.log
+lerna-debug.log
+*.log
+
+# Node.js (for both frontend and backend)
+**/node_modules
+
+# Build output
+**/dist
+**/tmp
+**/out-tsc
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Miscellaneous
+.sass-cache/
+/connect.lock
+**/coverage
+testem.log
+/typings
+
+# Angular-specific
+Reenbit-test-task.FE/.angular/cache
+
+# Backend-specific (Express.js)
+Reenbit-test-task.BE/package-lock.json
+Reenbit-test-task.BE/pnpm-lock.yaml
+Reenbit-test-task.BE/yarn.lock
