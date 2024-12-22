@@ -38,4 +38,5 @@
 .user-name {
   color: var(--text);
   font-weight: bold;
+  padding-left: 0.1rem;
 }

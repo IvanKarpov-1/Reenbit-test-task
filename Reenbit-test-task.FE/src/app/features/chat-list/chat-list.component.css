@@ -1,0 +1,8 @@
+.chat-list {
+  /*padding: 0.5rem;*/
+}
+
+.chats-label {
+  padding: 2rem 1.1rem;
+  color: var(--accent-1);
+}

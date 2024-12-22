@@ -1,0 +1,72 @@
+.chat-item {
+  --chat-item-background-color: transparent;
+
+  background-color: var(--chat-item-background-color);
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--surface-2);
+
+  transition: background-color 150ms ease;
+}
+
+.chat-item:hover {
+  --chat-item-background-color: var(--mantle);
+}
+
+.chat-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  flex: 1;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-name {
+  color: var(--text);
+  font-weight: bolder;
+}
+
+.last-update-date {
+  color: var(--subtext-1);
+  font-size: 0.875rem;
+}
+
+.subtitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.message {
+  flex-grow: 1;
+  padding-right: 0.25rem;
+  color: var(--subtext-0);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.badge {
+  min-width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--accent-1);
+  border-radius: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  font-size: 0.875rem;
+  line-height: 1.5625rem;
+}
+
+.message-counter {
+  color: var(--base);
+}
