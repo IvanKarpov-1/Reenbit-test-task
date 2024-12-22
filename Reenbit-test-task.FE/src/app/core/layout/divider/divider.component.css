@@ -1,20 +1,18 @@
 .divider {
-  position: relative;
   top: 0;
   left: 0;
-  margin-left: -3px;
-  margin-right: -3px;
+  margin-left: -4px;
+  margin-right: -4px;
   width: 10px;
   height: 100vh;
   cursor: ew-resize;
 }
 
 .divider-stripe {
-  position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 4px;
+  width: 2px;
   height: 100vh;
-  background-color: gray;
+  background-color: var(--surface-0);
 }

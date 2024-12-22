@@ -1,0 +1,54 @@
+.sidebar-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  background-color: var(--mantle);
+  border-bottom: 1px solid var(--surface-2);
+}
+
+.unauthorized-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: center;
+  gap: 1rem;
+}
+
+.unauthorized-section-text {
+  color: var(--text);
+  font-weight: bold;
+  text-align: center;
+}
+
+.user-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 1rem;
+}
+
+.user-name {
+  color: var(--text);
+  font-weight: bold;
+}
+
+.user-pic {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-pic-placeholder {
+  width: 4rem;
+  height: 4rem;
+  background-color: var(--overlay-2);
+}

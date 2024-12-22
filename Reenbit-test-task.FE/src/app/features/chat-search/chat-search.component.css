@@ -1,0 +1,64 @@
+.search-bar {
+  --search-bar-outline-color: transparent;
+
+  width: 100%;
+  background-color: var(--base);
+  color: var(--text);
+  padding: 0.25rem 2.5rem;
+  outline: 2px solid var(--search-bar-outline-color);
+  border-radius: 9999px;
+  border: 1px solid var(--surface-2);
+
+  transition: outline-color 150ms ease;
+}
+
+.search-bar::placeholder {
+  color: var(--subtext-1);
+}
+
+.search-bar:focus {
+  --search-bar-outline-color: var(--accent-2);
+}
+
+.search-bar-icons {
+  --search-bar-icon-stroke-color: var(--subtext-1);
+
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem;
+  pointer-events: none;
+}
+
+.search-bar:focus + .search-bar-icons .search-icon {
+  --search-bar-icon-stroke-color: var(--accent-2);
+}
+
+.search-bar-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke: var(--search-bar-icon-stroke-color);
+
+  transition: stroke 150ms ease;
+}
+
+.search-bar-reset-button {
+  pointer-events: none;
+  cursor: none;
+  opacity: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+
+  transition: opacity 150ms ease;
+}
+
+.search-bar-reset-button.search-bar-with-content {
+  pointer-events: auto;
+  cursor: pointer;
+  opacity: 100%;
+}
+
+.search-bar-reset-button:hover .reset-icon {
+  --search-bar-icon-stroke-color: var(--error);
+}

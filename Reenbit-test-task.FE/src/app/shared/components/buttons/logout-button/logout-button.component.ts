@@ -5,7 +5,11 @@ import { AuthService } from '@auth0/auth0-angular';
   selector: 'app-logout-button',
   standalone: true,
   imports: [],
-  template: ` <button class="" (click)="handleLogout()">Log Out</button> `,
+  template: ` <button>Log Out</button> `,
+  styleUrl: './logout-button.component.css',
+  host: {
+    '(click)': 'handleLogout()',
+  },
 })
 export class LogoutButtonComponent {
   private auth = inject(AuthService);

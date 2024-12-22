@@ -1,7 +1,3 @@
-<div class="sidebar">
-  @if (isAuthenticated$ | async) {
-    <app-logout-button></app-logout-button>
-  } @else {
-    <app-login-button></app-login-button>
-  }
+<div class="relative sidebar">
+  <app-sidebar-header></app-sidebar-header>
 </div>

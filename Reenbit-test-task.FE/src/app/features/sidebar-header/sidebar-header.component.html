@@ -1,0 +1,34 @@
+<div class="sidebar-header">
+  @if (isAuthenticated$ | async) {
+    <section class="user-section">
+      <div class="user-info">
+        <div class="user-pic">
+          @if ((user$ | async)?.picture; as picture) {
+            <img
+              [ngSrc]="picture"
+              width="64"
+              height="64"
+              priority
+              alt="User picture"
+            />
+          } @else {
+            <div class="user-pic-placeholder"></div>
+          }
+        </div>
+
+        <div class="user-name">
+          <span>{{ (user$ | async)?.name }}</span>
+        </div>
+      </div>
+      <app-logout-button></app-logout-button>
+    </section>
+    <app-chat-search></app-chat-search>
+  } @else {
+    <section class="unauthorized-section">
+      <app-login-button></app-login-button>
+      <span class="unauthorized-section-text"
+        >Please, Log In to use the application</span
+      >
+    </section>
+  }
+</div>

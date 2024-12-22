@@ -1,0 +1,51 @@
+<div class="relative marker">
+  <label class="sr-only" for="chat-search">Search or start new chat</label>
+  <input
+    [formControl]="searchTerm"
+    autocomplete="off"
+    class="search-bar"
+    id="chat-search"
+    name="chat-search"
+    placeholder="Search or start new chat"
+    type="search"
+  />
+
+  <div class="absolute search-bar-icons">
+    <svg
+      class="search-bar-icon search-icon"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+
+    <button
+      (click)="reset()"
+      [ngClass]="searchTerm.value.length > 0 ? 'search-bar-with-content' : ''"
+      class="search-bar-reset-button"
+      type="reset"
+    >
+      <svg
+        class="search-bar-icon reset-icon"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 18 18 6M6 6l12 12"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
+</div>

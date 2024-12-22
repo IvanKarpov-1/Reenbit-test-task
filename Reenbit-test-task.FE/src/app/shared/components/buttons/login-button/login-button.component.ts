@@ -5,7 +5,11 @@ import { AuthService } from '@auth0/auth0-angular';
   selector: 'app-login-button',
   standalone: true,
   imports: [],
-  template: ` <button class="" (click)="handleLogin()">Log In</button> `,
+  template: ` <button>Log In</button> `,
+  styleUrl: './login-button.component.css',
+  host: {
+    '(click)': 'handleLogin()',
+  },
 })
 export class LoginButtonComponent {
   private auth = inject(AuthService);
