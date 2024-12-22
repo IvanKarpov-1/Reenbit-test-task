@@ -4,7 +4,7 @@
   margin-left: -4px;
   margin-right: -4px;
   width: 10px;
-  height: 100vh;
+  height: 100%;
   cursor: ew-resize;
 }
 
@@ -13,6 +13,6 @@
   left: 50%;
   transform: translateX(-50%);
   width: 2px;
-  height: 100vh;
+  height: 100%;
   background-color: var(--surface-0);
 }
