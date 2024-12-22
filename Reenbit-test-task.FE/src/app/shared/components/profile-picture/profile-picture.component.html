@@ -1,0 +1,13 @@
+<div class="profile-picture">
+  @if (picture()) {
+    <img
+      [ngSrc]="picture()!"
+      width="64"
+      height="64"
+      priority
+      alt="User picture"
+    />
+  } @else {
+    <div class="profile-picture-placeholder"></div>
+  }
+</div>

@@ -39,16 +39,3 @@
   color: var(--text);
   font-weight: bold;
 }
-
-.user-pic {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.user-pic-placeholder {
-  width: 4rem;
-  height: 4rem;
-  background-color: var(--overlay-2);
-}

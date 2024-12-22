@@ -1,9 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { AsyncPipe, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoginButtonComponent } from '../../shared/components/buttons/login-button/login-button.component';
 import { LogoutButtonComponent } from '../../shared/components/buttons/logout-button/logout-button.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { ChatSearchComponent } from '../chat-search/chat-search.component';
+import { ProfilePictureComponent } from '../../shared/components/profile-picture/profile-picture.component';
 
 @Component({
   selector: 'app-sidebar-header',
@@ -12,8 +13,8 @@ import { ChatSearchComponent } from '../chat-search/chat-search.component';
     AsyncPipe,
     LoginButtonComponent,
     LogoutButtonComponent,
-    NgOptimizedImage,
     ChatSearchComponent,
+    ProfilePictureComponent,
   ],
   templateUrl: './sidebar-header.component.html',
   styleUrl: './sidebar-header.component.css',

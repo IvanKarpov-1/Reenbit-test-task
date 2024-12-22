@@ -2,19 +2,9 @@
   @if (isAuthenticated$ | async) {
     <section class="user-section">
       <div class="user-info">
-        <div class="user-pic">
-          @if ((user$ | async)?.picture; as picture) {
-            <img
-              [ngSrc]="picture"
-              width="64"
-              height="64"
-              priority
-              alt="User picture"
-            />
-          } @else {
-            <div class="user-pic-placeholder"></div>
-          }
-        </div>
+        <app-profile-picture
+          [picture]="(user$ | async)?.picture"
+        ></app-profile-picture>
 
         <div class="user-name">
           <span>{{ (user$ | async)?.name }}</span>
