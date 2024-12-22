@@ -1,12 +1,14 @@
 import 'dotenv/config';
 import http from 'http';
 import app from './server.js';
+import connectToMongoDb from './app/db/connectToMongoDb.js';
 
 const PORT = process.env.PORT || 3000;
 
 const server = http.createServer(app);
 
 server.listen(PORT, () => {
+  connectToMongoDb();
   console.log(`Server is running on http://localhost:${PORT}`);
 });
 
