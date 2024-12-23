@@ -6,6 +6,8 @@ import { NgStyle } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 import { UserService } from './features/user/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { User } from './features/user/user.model';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,12 +23,34 @@ export class AppComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    this.auth.isAuthenticated$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((isAuthenticated) => {
-        if (isAuthenticated) {
-          this.userService.login();
+    this.auth.user$
+      .pipe(
+        filter((user) => user === null || user !== undefined),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe((user) => {
+        let firstName: string;
+        let lastName = '';
+
+        if (user!.given_name && user!.family_name) {
+          firstName = user!.given_name;
+          lastName = user!.family_name;
+        } else if (user!.given_name) {
+          firstName = user!.given_name;
+        } else {
+          firstName = user!.name!;
         }
+
+        const appUser: User = {
+          _id: user!.sub!,
+          firstName: firstName,
+          lastName: lastName,
+          profilePicture: user!.picture!,
+          createdAt: '',
+          updatedAt: user!.updated_at!,
+          lastLogin: '',
+        };
+        this.userService.login(appUser);
       });
   }
 
