@@ -8,10 +8,17 @@ import { UserService } from './features/user/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { User } from './features/user/user.model';
 import { filter } from 'rxjs';
+import { ModalComponent } from './shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-root',
-  imports: [SidebarComponent, DividerComponent, MainContentComponent, NgStyle],
+  imports: [
+    SidebarComponent,
+    DividerComponent,
+    MainContentComponent,
+    NgStyle,
+    ModalComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

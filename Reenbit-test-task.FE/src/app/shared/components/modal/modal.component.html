@@ -1,0 +1,16 @@
+<div [ngClass]="currentModal() ? 'is-open' : ''" class="modal-container">
+  <!--  Background click area  -->
+  <div (click)="onCloseModal()" class="modal-background-overlay"></div>
+
+  <!--  Modal content  -->
+  @defer (when currentModal() === 'createChat') {
+    @if (currentModal() === 'createChat') {
+      <div class="modal-content"></div>
+    }
+  }
+  @defer (when currentModal() === 'removeChat') {
+    @if (currentModal() === 'removeChat') {
+      <div class="modal-content"></div>
+    }
+  }
+</div>

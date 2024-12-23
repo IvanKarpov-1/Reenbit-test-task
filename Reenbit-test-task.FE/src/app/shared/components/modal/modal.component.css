@@ -1,0 +1,30 @@
+.modal-container {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  background-color: color-mix(in srgb, var(--mantle) 30%, transparent);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.modal-container.is-open {
+  pointer-events: auto;
+  user-select: auto;
+  opacity: 100;
+}
+
+.modal-background-overlay {
+  position: fixed;
+  inset: 0;
+}
+
+.modal-content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
