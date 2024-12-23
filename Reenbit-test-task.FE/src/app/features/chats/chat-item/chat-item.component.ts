@@ -13,6 +13,7 @@ import { RecencyDatePipe } from '../../../shared/pipes/recency-date.pipe';
 import { User } from '../../user/user.model';
 import { AuthService } from '@auth0/auth0-angular';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-chat-item',
@@ -22,18 +23,47 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ChatItemComponent implements OnInit {
   chat = input.required<Chat>();
-  interlocutor = signal<User | undefined>(undefined);
+  private interlocutor = signal<User | undefined>(undefined);
   private readonly auth = inject(AuthService);
   private readonly destroyRef = inject(DestroyRef);
 
+  get profilePicture() {
+    switch (this.chat().chatType) {
+      case 'AutoResponse':
+        return this.chat().virtualUser.profilePicture;
+      case 'Personal':
+        return this.interlocutor()!.profilePicture;
+      case 'Group':
+        return this.chat().chatImage;
+    }
+  }
+
+  get name() {
+    switch (this.chat().chatType) {
+      case 'AutoResponse':
+        return `${this.chat().virtualUser.firstName} ${this.chat().virtualUser.lastName}`;
+      case 'Personal':
+        return `${this.interlocutor()!.firstName} ${this.interlocutor()!.lastName}`;
+      case 'Group':
+        return this.chat().name;
+    }
+  }
+
   ngOnInit() {
     this.auth.user$
-      .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(
+        filter((user) => user === null || user !== undefined),
+        takeUntilDestroyed(this.destroyRef)
+      )
       .subscribe((user) => {
-        if (user?.sub !== this.chat().user1._id) {
-          this.interlocutor.set(this.chat().user1);
-        } else {
-          this.interlocutor.set(this.chat().user2);
+        if (this.chat().chatType === 'Personal') {
+          this.interlocutor.set(
+            this.chat()
+              .participants.filter(
+                (participant) => participant.user._id !== user!.sub!
+              )
+              .pop()?.user
+          );
         }
       });
   }

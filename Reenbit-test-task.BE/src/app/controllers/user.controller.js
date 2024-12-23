@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
       }
 
       await user.save();
-      return res.status(200).json({ message: 'User login updated' });
+      return res.status(200).json({ message: 'User info updated' });
     } else {
       await User.create({
         _id: userId,
@@ -44,18 +44,36 @@ export const loginUser = async (req, res) => {
 
 const createPredefinedChats = async (userId) => {
   const chat1 = Chat.create({
-    user1: userId,
-    user2: '1',
+    participants: [{ user: userId }],
+    chatType: 'AutoResponse',
+    virtualUser: {
+      firstName: 'Alice',
+      lastName: 'Freeman',
+      profilePicture:
+        'https://api.dicebear.com/9.x/bottts/svg?seed=Alice-Freeman',
+    },
   });
 
   const chat2 = Chat.create({
-    user1: userId,
-    user2: '2',
+    participants: [{ user: userId }],
+    chatType: 'AutoResponse',
+    virtualUser: {
+      firstName: 'Arthur',
+      lastName: 'Leywin',
+      profilePicture:
+        'https://api.dicebear.com/9.x/bottts/svg?seed=Arthur-Leywin',
+    },
   });
 
   const chat3 = Chat.create({
-    user1: userId,
-    user2: '3',
+    participants: [{ user: userId }],
+    chatType: 'AutoResponse',
+    virtualUser: {
+      firstName: 'Caera',
+      lastName: 'Denoir',
+      profilePicture:
+        'https://api.dicebear.com/9.x/bottts/svg?seed=Caera-Denoir',
+    },
   });
 
   await Promise.all([chat1, chat2, chat3]);

@@ -1,14 +1,10 @@
 <a [routerLink]="['/']" class="chat-item">
   <div>
-    <app-profile-picture
-      [picture]="interlocutor()?.profilePicture"
-    ></app-profile-picture>
+    <app-profile-picture [picture]="profilePicture"></app-profile-picture>
   </div>
   <div class="chat-item-info">
     <div class="info-row">
-      <span class="user-name"
-        >{{ interlocutor()?.firstName }} {{ interlocutor()?.lastName }}</span
-      >
+      <span class="user-name">{{ name }}</span>
       <span class="last-update-date">{{
         chat().updatedAt | recencyDate: 'medium'
       }}</span>

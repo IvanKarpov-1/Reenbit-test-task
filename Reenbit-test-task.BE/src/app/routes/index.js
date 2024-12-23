@@ -9,7 +9,6 @@ router.get('/', function (req, res) {
   res.status(200).send('Everything works');
 });
 
-router.use('/admin', adminRoutes);
 router.use('/users', userRoutes);
 router.use('/chats', chatRoutes);
 
