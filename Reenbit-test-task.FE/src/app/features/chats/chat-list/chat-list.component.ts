@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ChatItemComponent } from '../chat-item/chat-item.component';
 import { ChatsService } from '../chats.service';
 
@@ -8,11 +8,7 @@ import { ChatsService } from '../chats.service';
   templateUrl: './chat-list.component.html',
   styleUrl: './chat-list.component.css',
 })
-export class ChatListComponent implements OnInit {
+export class ChatListComponent {
   private readonly chatsService = inject(ChatsService);
   chats = this.chatsService.chats;
-
-  ngOnInit() {
-    this.chatsService.getChats();
-  }
 }
