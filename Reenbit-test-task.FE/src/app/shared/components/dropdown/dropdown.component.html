@@ -1,0 +1,13 @@
+<div class="relative">
+  <button #dropdownActivator (click)="toggleDropdown()" type="button">
+    <ng-content select="activator-btn-content"></ng-content>
+  </button>
+
+  <div
+    #dropdownContent
+    [ngClass]="isOpen() ? 'dropdown-open' : 'dropdown-close'"
+    class="dropdown"
+  >
+    <ng-content></ng-content>
+  </div>
+</div>

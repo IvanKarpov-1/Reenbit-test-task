@@ -1,0 +1,15 @@
+.dropdown {
+  transition: opacity, transform, 150ms ease;
+}
+
+.dropdown-open {
+  pointer-events: auto;
+  user-select: auto;
+  transform: translateY(0);
+}
+
+.dropdown-close {
+  pointer-events: none;
+  user-select: none;
+  transform: translateY(-1rem);
+}
