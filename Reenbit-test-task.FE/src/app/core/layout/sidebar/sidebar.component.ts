@@ -4,7 +4,6 @@ import { ChatListComponent } from '../../../features/chats/chat-list/chat-list.c
 
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
   imports: [SidebarHeaderComponent, ChatListComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',

@@ -5,7 +5,6 @@ const SIDEBAR_MAX_WIDTH = 600;
 
 @Component({
   selector: 'app-divider',
-  standalone: true,
   imports: [],
   templateUrl: './divider.component.html',
   styleUrl: './divider.component.css',

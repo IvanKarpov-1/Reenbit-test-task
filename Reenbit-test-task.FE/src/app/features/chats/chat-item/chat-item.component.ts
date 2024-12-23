@@ -16,7 +16,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chat-item',
-  standalone: true,
   imports: [ProfilePictureComponent, RouterLink, RecencyDatePipe],
   templateUrl: './chat-item.component.html',
   styleUrl: './chat-item.component.css',

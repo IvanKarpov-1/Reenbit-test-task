@@ -11,7 +11,6 @@ import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [SidebarComponent, DividerComponent, MainContentComponent, NgStyle],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

@@ -8,7 +8,6 @@ import { ProfilePictureComponent } from '../../shared/components/profile-picture
 
 @Component({
   selector: 'app-sidebar-header',
-  standalone: true,
   imports: [
     AsyncPipe,
     LoginButtonComponent,

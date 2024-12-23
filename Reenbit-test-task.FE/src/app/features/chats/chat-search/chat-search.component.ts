@@ -6,7 +6,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chat-search',
-  standalone: true,
   imports: [ReactiveFormsModule, NgClass],
   templateUrl: './chat-search.component.html',
   styleUrl: './chat-search.component.css',

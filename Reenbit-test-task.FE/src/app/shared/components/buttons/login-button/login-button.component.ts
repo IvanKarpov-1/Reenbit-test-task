@@ -3,7 +3,6 @@ import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-login-button',
-  standalone: true,
   imports: [],
   template: ` <button>Log In</button> `,
   styleUrl: './login-button.component.css',
