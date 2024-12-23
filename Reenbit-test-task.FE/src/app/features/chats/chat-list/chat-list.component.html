@@ -1,0 +1,5 @@
+<div class="chat-list">
+  @for (chat of chats(); track chat._id) {
+    <app-chat-item [chat]="chat"></app-chat-item>
+  }
+</div>

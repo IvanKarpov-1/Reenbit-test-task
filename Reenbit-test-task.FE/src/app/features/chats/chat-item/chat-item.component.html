@@ -1,0 +1,27 @@
+<a [routerLink]="['/']" class="chat-item">
+  <div>
+    <app-profile-picture
+      [picture]="interlocutor()?.profilePicture"
+    ></app-profile-picture>
+  </div>
+  <div class="chat-item-info">
+    <div class="info-row">
+      <span class="user-name"
+        >{{ interlocutor()?.firstName }} {{ interlocutor()?.lastName }}</span
+      >
+      <span class="last-update-date">{{
+        chat().updatedAt | recencyDate: 'medium'
+      }}</span>
+    </div>
+    <div class="subtitle">
+      <p class="message">
+        {{ chat().lastMessage }}
+      </p>
+      @if (true) {
+        <div class="badge">
+          <span class="message-counter">1</span>
+        </div>
+      }
+    </div>
+  </div>
+</a>

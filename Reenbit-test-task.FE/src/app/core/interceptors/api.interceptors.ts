@@ -5,8 +5,6 @@ export const apiBaseUrlInterceptor: HttpInterceptorFn = (req, next) => {
   const apiBaseUrl = environment.apiBaseUrl;
   const reqUrl = req.url.startsWith('/') ? req.url.slice(1) : req.url;
   const apiReq = req.clone({ url: `${apiBaseUrl}/${reqUrl}` });
-  
-  console.log(environment);
 
   return next(apiReq);
 };

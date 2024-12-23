@@ -1,5 +1,6 @@
 import express from 'express';
 import userRoutes from './user.routes.js';
+import chatRoutes from './chat.routes.js';
 import adminRoutes from './admin.routes.js';
 
 const router = express.Router();
@@ -10,5 +11,6 @@ router.get('/', function (req, res) {
 
 router.use('/admin', adminRoutes);
 router.use('/users', userRoutes);
+router.use('/chats', chatRoutes);
 
 export default router;

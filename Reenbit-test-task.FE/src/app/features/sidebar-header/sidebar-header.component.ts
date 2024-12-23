@@ -3,7 +3,7 @@ import { AsyncPipe } from '@angular/common';
 import { LoginButtonComponent } from '../../shared/components/buttons/login-button/login-button.component';
 import { LogoutButtonComponent } from '../../shared/components/buttons/logout-button/logout-button.component';
 import { AuthService } from '@auth0/auth0-angular';
-import { ChatSearchComponent } from '../chat-search/chat-search.component';
+import { ChatSearchComponent } from '../chats/chat-search/chat-search.component';
 import { ProfilePictureComponent } from '../../shared/components/profile-picture/profile-picture.component';
 
 @Component({

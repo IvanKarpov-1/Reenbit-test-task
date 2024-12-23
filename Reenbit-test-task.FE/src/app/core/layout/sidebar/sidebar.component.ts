@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SidebarHeaderComponent } from '../../../features/sidebar-header/sidebar-header.component';
-import { ChatListComponent } from '../../../features/chat-list/chat-list.component';
+import { ChatListComponent } from '../../../features/chats/chat-list/chat-list.component';
 
 @Component({
   selector: 'app-sidebar',
