@@ -1,0 +1,56 @@
+<div class="content">
+  <form [formGroup]="form" class="controls">
+    <div class="control">
+      <label class="label" for="first-name">First name</label>
+      <input
+        [ngClass]="
+          firstName.hasError('required') && !firstName.untouched
+            ? 'input-error'
+            : ''
+        "
+        class="input first-name"
+        formControlName="firstName"
+        id="first-name"
+        name="first-name"
+        placeholder="Input first name"
+        type="text"
+      />
+      @if (firstName.hasError('required') && !firstName.untouched) {
+        <small class="error-text">First name is required</small>
+      }
+    </div>
+
+    <div class="control">
+      <label class="label" for="last-name">Last name</label>
+      <input
+        [ngClass]="
+          lastName.hasError('required') && !lastName.untouched
+            ? 'input-error'
+            : ''
+        "
+        class="input last-name"
+        formControlName="lastName"
+        id="last-name"
+        name="last-name"
+        placeholder="Input last name"
+        type="text"
+      />
+      @if (lastName.hasError('required') && !lastName.untouched) {
+        <small class="error-text">Last name is required</small>
+      }
+    </div>
+
+    <div class="actions">
+      <button (click)="onCancel()" class="btn cancel">Cancel</button>
+      <button
+        (click)="onSubmit()"
+        [disabled]="!form.valid"
+        [ngClass]="!form.valid ? 'disabled' : ''"
+        class="btn submit"
+        type="submit"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+</div>

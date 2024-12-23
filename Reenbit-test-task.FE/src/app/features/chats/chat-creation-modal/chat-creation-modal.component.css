@@ -1,0 +1,113 @@
+.content {
+  background-color: var(--mantle);
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.label {
+  position: relative;
+  margin-left: 0.2rem;
+}
+
+.label:after {
+  position: absolute;
+  content: '*';
+  margin-left: 0.25rem;
+  font-size: 1.5rem;
+  color: var(--error);
+}
+
+.control {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input {
+  --input-outline-color: transparent;
+  --input-border-color: var(--surface-2);
+
+  width: 100%;
+  background-color: var(--base);
+  color: var(--text);
+  padding: 0.25rem 0.75rem;
+  outline: 1px solid var(--input-outline-color);
+  border-radius: 9999px;
+  border: 1px solid var(--input-border-color);
+}
+
+.input::placeholder {
+  color: var(--subtext-1);
+}
+
+.input:focus {
+  --input-outline-color: var(--accent-2);
+  --input-border-color: var(--accent-2);
+}
+
+.input-error {
+  --input-outline-color: var(--error);
+  --input-border-color: var(--error);
+}
+
+.input-error:focus {
+  --input-outline-color: var(--error);
+  --input-border-color: var(--error);
+}
+
+.error-text {
+  position: absolute;
+  bottom: -1.5rem;
+  margin-left: 0.2rem;
+  color: var(--error);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.btn {
+  border-radius: 9999px;
+  border: 1px solid var(--btn-border-color);
+  background-color: var(--btn-background-color);
+  color: var(--btn-text-color);
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  word-wrap: normal;
+  cursor: pointer;
+
+  transition: color, background-color 150ms ease;
+}
+
+.btn:hover {
+  background-color: color-mix(in srgb, var(--btn-background-color) 80%, transparent);
+}
+
+.submit {
+  --btn-border-color: var(--accent-1);
+  --btn-text-color: var(--base);
+  --btn-background-color: var(--accent-1);
+}
+
+.cancel {
+  --btn-text-color: var(--text);
+  --btn-background-color: var(--surface-0);
+}
+
+.disabled {
+  pointer-events: none;
+  user-select: none;
+  --btn-border-color: color-mix(in srgb, var(--accent-1) 70%, transparent);
+  --btn-text-color: color-mix(in srgb, var(--base) 90%, transparent);
+  --btn-background-color: color-mix(in srgb, var(--accent-1) 70%, transparent);
+}

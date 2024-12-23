@@ -5,7 +5,9 @@
   <!--  Modal content  -->
   @defer (when currentModal() === 'createChat') {
     @if (currentModal() === 'createChat') {
-      <div class="modal-content"></div>
+      <div class="modal-content">
+        <app-chat-creation-modal></app-chat-creation-modal>
+      </div>
     }
   }
   @defer (when currentModal() === 'removeChat') {

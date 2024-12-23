@@ -12,7 +12,12 @@
       </div>
       <app-logout-button></app-logout-button>
     </section>
-    <app-chat-search></app-chat-search>
+    <div class="actions-row">
+      <app-chat-search></app-chat-search>
+      <button (click)="onCreateChat()" class="create-chat-btn">
+        Create chat
+      </button>
+    </div>
   } @else {
     <section class="unauthorized-section">
       <app-login-button></app-login-button>

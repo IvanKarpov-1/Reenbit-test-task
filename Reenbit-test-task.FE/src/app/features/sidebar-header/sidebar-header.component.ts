@@ -5,6 +5,7 @@ import { LogoutButtonComponent } from '../../shared/components/buttons/logout-bu
 import { AuthService } from '@auth0/auth0-angular';
 import { ChatSearchComponent } from '../chats/chat-search/chat-search.component';
 import { ProfilePictureComponent } from '../../shared/components/profile-picture/profile-picture.component';
+import { ModalService } from '../../shared/components/modal/modal.service';
 
 @Component({
   selector: 'app-sidebar-header',
@@ -22,4 +23,9 @@ export class SidebarHeaderComponent {
   private readonly auth = inject(AuthService);
   isAuthenticated$ = this.auth.isAuthenticated$;
   user$ = this.auth.user$;
+  private readonly modalService = inject(ModalService);
+
+  onCreateChat() {
+    this.modalService.openModal('createChat');
+  }
 }

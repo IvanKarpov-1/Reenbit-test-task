@@ -40,3 +40,28 @@
   font-weight: bold;
   padding-left: 0.1rem;
 }
+
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.create-chat-btn {
+  border-radius: 9999px;
+  border: 1px solid var(--accent-1);
+  background-color: var(--accent-1);
+  color: var(--base);
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  word-wrap: normal;
+  cursor: pointer;
+
+  transition: color, background-color 150ms ease;
+}
+
+.create-chat-btn:hover {
+  background-color: color-mix(in srgb, var(--accent-1) 80%, transparent);
+}
