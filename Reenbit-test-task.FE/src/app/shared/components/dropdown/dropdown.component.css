@@ -6,10 +6,12 @@
   pointer-events: auto;
   user-select: auto;
   transform: translateY(0);
+  opacity: 100;
 }
 
 .dropdown-close {
   pointer-events: none;
   user-select: none;
   transform: translateY(-1rem);
+  opacity: 0;
 }
