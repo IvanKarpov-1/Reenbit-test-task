@@ -2,12 +2,18 @@
   @if (picture()) {
     <img
       [ngSrc]="picture()!"
-      width="64"
-      height="64"
+      [style.width]="size() + 'rem'"
+      [style.height]="size() + 'rem'"
+      [width]="size() * 16"
+      [height]="size() * 16"
       priority
       alt="User picture"
     />
   } @else {
-    <div class="profile-picture-placeholder"></div>
+    <div
+      [style.width]="size() + 'rem'"
+      [style.height]="size() + 'rem'"
+      class="profile-picture-placeholder"
+    ></div>
   }
 </div>

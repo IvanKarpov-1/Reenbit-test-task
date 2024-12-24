@@ -1,12 +1,8 @@
 .profile-picture {
-  width: 4rem;
-  height: 4rem;
   border-radius: 50%;
   overflow: hidden;
 }
 
 .profile-picture-placeholder {
-  width: 4rem;
-  height: 4rem;
   background-color: var(--overlay-2);
 }
