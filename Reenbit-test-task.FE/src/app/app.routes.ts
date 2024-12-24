@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { chatPageResolver } from './features/chats/chat-page/chat-page.resolver';
 
 export const routes: Routes = [
   {
@@ -14,5 +15,8 @@ export const routes: Routes = [
       import('./features/chats/chat-page/chat-page.component').then(
         (mod) => mod.ChatPageComponent
       ),
+    resolve: {
+      chat: chatPageResolver,
+    },
   },
 ];

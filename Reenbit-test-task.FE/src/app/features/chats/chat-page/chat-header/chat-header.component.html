@@ -1,7 +1,10 @@
 <div class="chat-header-container">
   <div class="chat-header-user-info">
-    <app-profile-picture [size]="3"></app-profile-picture>
-    <span>Alice Freeman</span>
+    <app-profile-picture
+      [picture]="chat() | chatPicture"
+      [size]="3"
+    ></app-profile-picture>
+    <span>{{ chat() | chatName }}</span>
   </div>
   <app-chat-actions></app-chat-actions>
 </div>
