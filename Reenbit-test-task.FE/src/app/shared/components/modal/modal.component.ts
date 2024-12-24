@@ -12,6 +12,8 @@ import { ChatCreationModalComponent } from '../../../features/chats/chat-creatio
 export class ModalComponent {
   modalService = inject(ModalService);
   currentModal = this.modalService.currentModal;
+  callback = this.modalService.callback;
+  params = this.modalService.params;
 
   onCloseModal() {
     this.modalService.closeModal();
