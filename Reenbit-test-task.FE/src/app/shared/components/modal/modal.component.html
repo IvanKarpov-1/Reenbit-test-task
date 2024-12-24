@@ -10,9 +10,21 @@
       </div>
     }
   }
+  @defer (when currentModal() === 'updateChat') {
+    @if (currentModal() === 'updateChat') {
+      <div class="modal-content">
+        <app-chat-updation-modal [chat]="params()[0]">
+        </app-chat-updation-modal>
+      </div>
+    }
+  }
   @defer (when currentModal() === 'removeChat') {
     @if (currentModal() === 'removeChat') {
-      <div class="modal-content"></div>
+      <div class="modal-content">
+        <app-chat-removing-modal
+          [chatId]="params()[0]"
+        ></app-chat-removing-modal>
+      </div>
     }
   }
 </div>

@@ -1,1 +1,1 @@
-export type ModalType = 'createChat' | 'removeChat';
+export type ModalType = 'createChat' | 'updateChat' | 'removeChat';

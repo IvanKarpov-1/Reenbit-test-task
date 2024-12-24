@@ -5,8 +5,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ChatsService } from '../chats.service';
-import { ModalService } from '../../../shared/components/modal/modal.service';
+import { ChatsService } from '../../chats.service';
+import { ModalService } from '../../../../shared/components/modal/modal.service';
 import { NgClass } from '@angular/common';
 
 @Component({

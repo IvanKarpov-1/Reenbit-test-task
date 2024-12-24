@@ -1,4 +1,4 @@
-<app-dropdown>
+<app-dropdown [closeOnClickInside]="true">
   <div class="activator-button" ngProjectAs="activator-btn-content">
     <span class="sr-only">Chat actions</span>
     <svg
@@ -18,7 +18,7 @@
   </div>
 
   <div class="actions-list">
-    <button class="action-button">
+    <button (click)="onEdit()" class="action-button">
       <svg
         class="action-button-svg"
         fill="none"
@@ -35,7 +35,7 @@
       </svg>
       <span class="action-button-text">Edit</span>
     </button>
-    <button class="action-button remove">
+    <button (click)="onRemove()" class="action-button remove">
       <svg
         class="action-button-svg"
         fill="none"

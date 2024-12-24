@@ -1,0 +1,47 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+  background-color: var(--mantle);
+  padding: 2rem;
+  border-radius: 2rem;
+  border: 1px solid var(--surface-0);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  border-radius: 9999px;
+  border: 1px solid var(--btn-border-color);
+  background-color: var(--btn-background-color);
+  color: var(--btn-text-color);
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  word-wrap: normal;
+  cursor: pointer;
+
+  transition: color, background-color 150ms ease;
+}
+
+.btn:hover {
+  background-color: color-mix(in srgb, var(--btn-background-color) 80%, transparent);
+}
+
+.remove {
+  --btn-border-color: var(--error);
+  --btn-text-color: var(--base);
+  --btn-background-color: var(--error);
+}
+
+.cancel {
+  --btn-text-color: var(--text);
+  --btn-background-color: var(--surface-0);
+}

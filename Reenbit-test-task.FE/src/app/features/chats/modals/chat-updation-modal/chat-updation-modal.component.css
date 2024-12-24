@@ -2,6 +2,8 @@
   background-color: var(--mantle);
   padding: 2rem;
   border-radius: 2rem;
+  border: 1px solid var(--surface-0);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .controls {
@@ -85,6 +87,7 @@
   text-align: center;
   word-wrap: normal;
   cursor: pointer;
+  min-width: 5rem;
 
   transition: color, background-color 150ms ease;
 }
@@ -110,4 +113,11 @@
   --btn-border-color: color-mix(in srgb, var(--accent-1) 70%, transparent);
   --btn-text-color: color-mix(in srgb, var(--base) 90%, transparent);
   --btn-background-color: color-mix(in srgb, var(--accent-1) 70%, transparent);
+}
+
+.chat-type-personal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }

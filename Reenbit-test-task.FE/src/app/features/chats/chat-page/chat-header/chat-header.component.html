@@ -6,5 +6,5 @@
     ></app-profile-picture>
     <span>{{ chat() | chatName }}</span>
   </div>
-  <app-chat-actions></app-chat-actions>
+  <app-chat-actions [chat]="chat()"></app-chat-actions>
 </div>

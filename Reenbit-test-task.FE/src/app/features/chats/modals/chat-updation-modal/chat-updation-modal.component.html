@@ -1,0 +1,96 @@
+<div class="content">
+  @if (chat()?.chatType === 'AutoResponse') {
+    <form [formGroup]="form()" class="controls">
+      <div class="control">
+        <label class="label" for="first-name-auto">First name</label>
+        <input
+          [ngClass]="
+            firstName.hasError('required') && !firstName.untouched
+              ? 'input-error'
+              : ''
+          "
+          class="input first-name"
+          formControlName="firstName"
+          id="first-name-auto"
+          name="first-name-auto"
+          placeholder="Input first name"
+          type="text"
+        />
+        @if (firstName.hasError('required') && !firstName.untouched) {
+          <small class="error-text">First name is required</small>
+        }
+      </div>
+
+      <div class="control">
+        <label class="label" for="last-name-auto">Last name</label>
+        <input
+          [ngClass]="
+            lastName.hasError('required') && !lastName.untouched
+              ? 'input-error'
+              : ''
+          "
+          class="input last-name"
+          formControlName="lastName"
+          id="last-name-auto"
+          name="last-name-auto"
+          placeholder="Input last name"
+          type="text"
+        />
+        @if (lastName.hasError('required') && !lastName.untouched) {
+          <small class="error-text">Last name is required</small>
+        }
+      </div>
+
+      <div class="actions">
+        <button (click)="onCancel()" class="btn cancel">Cancel</button>
+        <button
+          (click)="onSubmit()"
+          [disabled]="!form().valid"
+          [ngClass]="!form().valid ? 'disabled' : ''"
+          class="btn submit"
+          type="submit"
+        >
+          Edit
+        </button>
+      </div>
+    </form>
+  } @else if (chat()?.chatType === 'Personal') {
+    <div class="chat-type-personal">
+      <span>You cannot change name for the real person</span>
+      <button (click)="onCancel()" class="btn cancel">Ok</button>
+    </div>
+  } @else if (chat()?.chatType === 'Group') {
+    <form [formGroup]="form()" class="controls">
+      <div class="control">
+        <label class="label" for="group-name">Group name</label>
+        <input
+          [ngClass]="
+            name.hasError('required') && !name.untouched ? 'input-error' : ''
+          "
+          class="input first-name"
+          formControlName="name"
+          id="group-name"
+          name="group-name"
+          placeholder="Input group name"
+          type="text"
+        />
+        @if (name.hasError('required') && !name.untouched) {
+          <small class="error-text">Group name is required</small>
+        }
+      </div>
+
+      <div class="actions">
+        <button (click)="onCancel()" class="btn cancel">Cancel</button>
+        <button
+          (click)="onSubmit()"
+          [disabled]="!form().valid"
+          [ngClass]="!form().valid ? 'disabled' : ''"
+          class="btn submit"
+          type="submit"
+        >
+          Edit
+        </button>
+      </div>
+    </form>
+  }
+</div>
