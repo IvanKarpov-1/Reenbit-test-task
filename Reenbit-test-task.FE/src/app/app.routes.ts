@@ -8,4 +8,11 @@ export const routes: Routes = [
         (mod) => mod.CallbackComponent
       ),
   },
+  {
+    path: ':chatId',
+    loadComponent: () =>
+      import('./features/chats/chat-page/chat-page.component').then(
+        (mod) => mod.ChatPageComponent
+      ),
+  },
 ];

@@ -1,0 +1,9 @@
+.chat-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-content {
+  flex: 1;
+}

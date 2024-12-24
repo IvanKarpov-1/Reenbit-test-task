@@ -1,0 +1,17 @@
+.chat-header-container {
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  background-color: var(--mantle);
+  border-bottom: 1px solid var(--surface-2);
+}
+
+.chat-header-user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+}

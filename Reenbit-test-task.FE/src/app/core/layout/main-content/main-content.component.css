@@ -1,0 +1,3 @@
+:host {
+  background-color: color-mix(in srgb, var(--base) 50%, transparent);
+}

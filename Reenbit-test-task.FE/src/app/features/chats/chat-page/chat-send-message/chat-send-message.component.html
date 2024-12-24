@@ -1,0 +1,45 @@
+<div class="relative marker">
+  <label class="sr-only" for="chat-input-message">Input message</label>
+  <form [formGroup]="messageForm" style="font-size: 0">
+    <textarea
+      #messageArea
+      autocomplete="off"
+      class="message-area"
+      formControlName="message"
+      id="chat-input-message"
+      name="chat-input-message"
+      placeholder="Input message"
+      rows="1"
+      style="font-size: 1rem"
+    ></textarea>
+  </form>
+
+  <div class="absolute message-area-icons">
+    <button
+      (click)="onSend()"
+      [disabled]="!(message.value && message.value.length > 0)"
+      [ngClass]="
+        message.value && message.value.length > 0
+          ? 'message-area-with-content'
+          : ''
+      "
+      class="message-area-send-button"
+      type="submit"
+    >
+      <svg
+        class="message-area-icon send-icon"
+        fill="currentColor"
+        stroke="currentColor"
+        stroke-width="1.5"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
