@@ -4,6 +4,7 @@
       <div class="user-info">
         <app-profile-picture
           [picture]="(user$ | async)?.picture"
+          [isPriority]="true"
         ></app-profile-picture>
 
         <div class="user-name">

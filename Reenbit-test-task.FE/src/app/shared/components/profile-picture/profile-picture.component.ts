@@ -10,4 +10,5 @@ import { NgOptimizedImage } from '@angular/common';
 export class ProfilePictureComponent {
   picture = input<string>();
   size = input<number>(4);
+  isPriority = input<boolean>(false);
 }

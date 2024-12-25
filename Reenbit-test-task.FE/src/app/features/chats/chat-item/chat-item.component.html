@@ -1,6 +1,9 @@
 <a [routerLink]="['/', chat()._id]" class="chat-item">
   <div>
-    <app-profile-picture [picture]="chat() | chatPicture"></app-profile-picture>
+    <app-profile-picture
+      [isPriority]="true"
+      [picture]="chat() | chatPicture"
+    ></app-profile-picture>
   </div>
   <div class="chat-item-info">
     <div class="info-row">
