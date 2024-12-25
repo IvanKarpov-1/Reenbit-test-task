@@ -12,9 +12,11 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { MessagesService } from '../../../messages/messages.service';
 
 @Component({
   selector: 'app-chat-send-message',
@@ -24,8 +26,9 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 })
 export class ChatSendMessageComponent implements OnInit, AfterViewInit {
   messageForm = new FormGroup({
-    message: new FormControl(''),
+    message: new FormControl('', [Validators.required]),
   });
+  private readonly messagesService = inject(MessagesService);
   private readonly elementRef = viewChild.required<ElementRef>('messageArea');
   private readonly destroyRef = inject(DestroyRef);
 
@@ -43,7 +46,10 @@ export class ChatSendMessageComponent implements OnInit, AfterViewInit {
     this.resize();
   }
 
-  onSend() {}
+  onSend() {
+    this.messagesService.createMessage(this.message.value!);
+    this.messageForm.reset();
+  }
 
   resize() {
     const nativeElement = this.elementRef().nativeElement;

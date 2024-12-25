@@ -1,0 +1,4 @@
+@for (message of messages().values(); track message._id) {
+  @let isOwn = !message.isAutoResponse && message.sender._id === userId();
+  <app-message [message]="message" [isOwn]="isOwn" #message></app-message>
+}

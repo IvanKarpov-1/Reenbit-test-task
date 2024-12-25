@@ -1,0 +1,18 @@
+<div class="message-item">
+  @if (!isOwn()) {
+    <div class="message-sender-picture">
+      <app-profile-picture
+        [size]="2.5"
+        [picture]="message().senderPicture"
+      ></app-profile-picture>
+    </div>
+  }
+  <div class="message-content">
+    <div class="message-text">
+      <span>{{ message().content }}</span>
+    </div>
+    <small class="message-timestamp">{{
+      message().createdAt | date: 'short'
+    }}</small>
+  </div>
+</div>

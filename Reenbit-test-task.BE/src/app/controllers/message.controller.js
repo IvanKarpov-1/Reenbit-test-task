@@ -1,0 +1,104 @@
+import { getSubFromJwt } from '../utils/getSubFromJwt.js';
+import Message from '../models/message.model.js';
+import Chat from '../models/chat.model.js';
+
+export const getMessages = async (req, res) => {
+  const userId = getSubFromJwt(req.auth);
+
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+  const chatId = req.params.chatId;
+
+  const messages = await Message.find({ chat: chatId })
+    .populate('sender')
+    .exec();
+
+  return res.status(200).json(messages);
+};
+
+export const createMessage = async (req, res) => {
+  const { result, status, json, userId, chatId, chat } = await doChecks(req);
+
+  if (!result) {
+    return res.status(status).json(json);
+  }
+
+  const content = req.body.content;
+
+  let message = await Message.create({
+    sender: userId,
+    chat: chatId,
+    content: content,
+  });
+
+  message = await Message.findById(message._id).populate('sender').exec();
+  message.senderPicture = message.sender.profilePicture;
+
+  chat.lastMessage = message._id;
+
+  await chat.save();
+
+  return res.status(201).json(message);
+};
+
+export const createAutoResponseMessage = async (req, res) => {
+  const { result, status, json, chatId, chat } = await doChecks(req);
+
+  if (!result) {
+    return res.status(status).json(json);
+  }
+
+  if (!chat.chatType === 'AutoResponse') {
+    return res.status(201).json({ message: 'Wrong type of chat' });
+  }
+
+  const randomQuote = await fetch('https://stoic.tekloon.net/stoic-quote');
+  const randomQuoteData = await randomQuote.json();
+
+  console.log(randomQuoteData);
+
+  const autoResponse = await Message.create({
+    senderPicture: chat.virtualUser.profilePicture,
+    chat: chatId,
+    content: randomQuoteData.data.quote,
+    isAutoResponse: true,
+  });
+
+  chat.lastMessage = autoResponse._id;
+
+  await chat.save();
+
+  return res.status(201).json(autoResponse);
+};
+
+const doChecks = async (req) => {
+  const userId = getSubFromJwt(req.auth);
+
+  if (!userId)
+    return {
+      result: false,
+      status: 401,
+      json: { error: 'Unauthorized' },
+    };
+
+  const chatId = req.params.chatId;
+
+  const chat = await Chat.findOne({
+    _id: chatId,
+    'participants.user': userId,
+  }).exec();
+
+  if (!chat)
+    return {
+      result: false,
+      status: 404,
+      json: { error: 'Chat not found' },
+    };
+
+  return {
+    result: true,
+    userId: userId,
+    chatId: chatId,
+    chat: chat,
+  };
+};

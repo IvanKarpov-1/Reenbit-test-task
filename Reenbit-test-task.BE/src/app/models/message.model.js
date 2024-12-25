@@ -7,6 +7,7 @@ const messageSchema = new mongoose.Schema(
       ref: 'User',
       require: true,
     },
+    senderPicture: String,
     chat: {
       type: mongoose.Types.ObjectId,
       ref: 'Chat',
@@ -15,6 +16,10 @@ const messageSchema = new mongoose.Schema(
       type: String,
       require: true,
       trim: true,
+    },
+    isAutoResponse: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

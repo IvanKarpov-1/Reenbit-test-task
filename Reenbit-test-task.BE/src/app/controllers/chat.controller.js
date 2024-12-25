@@ -104,7 +104,7 @@ export const deleteChat = async (req, res) => {
   const result = await Chat.deleteOne({
     _id: chatId,
     'participants.user': userId,
-  });
+  }).exec();
 
   return result.deletedCount === 0
     ? res.status(404).json({ error: 'Chat not found', details: error.errors })

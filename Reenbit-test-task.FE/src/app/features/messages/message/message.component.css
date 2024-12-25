@@ -1,0 +1,47 @@
+.interlocutor-message {
+  display: flex;
+  justify-content: var(--message-align);
+  --message-align: start;
+  --message-timestamp-align: start;
+  --message-text-background-color: var(--lavender);
+  --message-text-text-color: var(--base);
+}
+
+.own-message {
+  display: flex;
+  justify-content: var(--message-align);
+  --message-align: end;
+  --message-timestamp-align: end;
+  --message-text-background-color: var(--mantle);
+  --message-text-text-color: var(--text);
+}
+
+.message-item {
+  display: flex;
+  gap: 1rem;
+  margin: 0.5rem 1rem;
+  max-width: 50vw;
+}
+
+.message-sender-picture {
+  flex-shrink: 0;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message-text {
+  background-color: var(--message-text-background-color);
+  color: var(--message-text-text-color);
+
+  padding: 0.5rem 1rem;
+  border-radius: 1.5rem;
+}
+
+.message-timestamp {
+  color: var(--subtext-1);
+  align-self: var(--message-timestamp-align);
+}
