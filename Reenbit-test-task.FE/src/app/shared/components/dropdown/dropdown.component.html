@@ -3,7 +3,8 @@
     #dropdownActivator
     (click)="toggleDropdown()"
     [ngClass]="
-      isShowActivatorButtonOnOuterHover() && outerHoveringState()
+      !isShowActivatorButtonOnOuterHover() ||
+      (isShowActivatorButtonOnOuterHover() && outerHoveringState())
         ? 'outerIsHovering'
         : 'outerIsNotHovering'
     "
