@@ -102,4 +102,16 @@ export class ChatSendMessageComponent implements OnInit, AfterViewInit {
   updateState() {
     this.resize();
   }
+
+  onEnter(event: Event) {
+    event.preventDefault();
+    if (this.message.value && this.message.value.length > 0) {
+      this.onSend();
+    }
+  }
+
+  onControlEnter(event: Event) {
+    event.preventDefault();
+    this.message.setValue(this.message.value + '\n');
+  }
 }

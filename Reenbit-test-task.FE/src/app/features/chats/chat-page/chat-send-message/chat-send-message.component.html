@@ -3,6 +3,8 @@
   <form [formGroup]="messageForm" style="font-size: 0">
     <textarea
       #messageArea
+      (keydown.control.enter)="onControlEnter($event)"
+      (keydown.enter)="onEnter($event)"
       autocomplete="off"
       class="message-area"
       formControlName="message"
