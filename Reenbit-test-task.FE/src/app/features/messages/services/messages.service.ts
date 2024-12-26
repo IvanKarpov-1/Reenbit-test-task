@@ -17,14 +17,16 @@ export class MessagesService {
   private readonly messages = signal<Map<string, Map<string, Message>>>(
     new Map<string, Map<string, Message>>()
   );
+  private readonly _isMessagesLoading = signal<boolean>(false);
   currentMessages = computed(() => {
     const chatId = this.currentChat()?._id ?? '';
+    this._isMessagesLoading();
 
-    if (!this.messages().has(chatId)) {
-      this.messages().set(chatId, new Map<string, Message>());
-    }
+    // if (!this.messages().has(chatId)) {
+    //   this.messages().set(chatId, new Map<string, Message>());
+    // }
 
-    return this.messages().get(chatId)!;
+    return this.messages().get(chatId);
   });
   private readonly messagesFlatten: Map<
     string,
@@ -32,24 +34,32 @@ export class MessagesService {
   > = new Map<string, { chatId: string; message: Message }>();
   private readonly http = inject(HttpClient);
   private readonly modifierService = inject(ValuesModifierService);
+  private readonly toastsService = inject(ToastsService);
 
   getMessages(chatId?: string) {
     chatId = chatId ?? this.currentChat()?._id;
     if (!chatId) return;
 
+    this._isMessagesLoading.set(true);
+
     this.http
       .get<Message[]>(`api/messages/chat/${chatId}`)
       .subscribe((messages) => {
-        if (!this.messages().has(chatId)) {
-          this.messages().set(chatId, new Map<string, Message>());
-        }
+        // if (!this.messages().has(chatId)) {
+        //   this.messages().set(chatId, new Map<string, Message>());
+        // }
+
+        this.messages().set(chatId, new Map<string, Message>());
 
         const chatsMessages = this.messages().get(chatId)!;
 
         messages.forEach((message) => {
-          chatsMessages.set(message._id, message);
-          this.messagesFlatten.set(message._id, { chatId, message });
+          message.internalId = message._id;
+          chatsMessages.set(message.internalId, message);
+          this.messagesFlatten.set(message.internalId, { chatId, message });
         });
+
+        this._isMessagesLoading.set(false);
       });
   }
 
@@ -61,7 +71,7 @@ export class MessagesService {
     const randomMessageId = this.getRandomId();
 
     const newMessage = {
-      _id: randomMessageId,
+      internalId: randomMessageId,
       sender: { _id: this.userId()! },
       content: content,
       createdAt: Date.now().toString(),
@@ -86,9 +96,9 @@ export class MessagesService {
     }
 
     // @ts-ignore
-    this.messages().get(chatId)?.set(newMessage._id, newMessage);
+    this.messages().get(chatId)?.set(newMessage.internalId, newMessage);
     // @ts-ignore
-    this.messagesFlatten.set(newMessage._id, newMessage);
+    this.messagesFlatten.set(newMessage.internalId, newMessage);
 
     this.http
       .post<Message>(
@@ -100,15 +110,10 @@ export class MessagesService {
         tap((response) => {
           if (response.status === 201) {
             const message = this.messages().get(chatId)!.get(randomMessageId)!;
-            this.messages().get(chatId)!.delete(randomMessageId);
-            this.messagesFlatten.delete(randomMessageId);
 
             message._id = response.body!._id;
             message.sender = response.body!.sender;
             message.isAutoResponse = response.body!.isAutoResponse;
-
-            this.messages().get(chatId)!.set(message._id, message);
-            this.messagesFlatten.set(message._id, { chatId, message });
           } else {
             this.messages().get(chatId)?.delete(randomMessageId);
             this.messagesFlatten.delete(randomMessageId);
@@ -118,6 +123,7 @@ export class MessagesService {
             }
           }
         }),
+        delay(3000),
         switchMap((response) => {
           if (response.status === 201) {
             return this.http.post<Message>(
@@ -128,20 +134,33 @@ export class MessagesService {
           } else {
             return of(undefined);
           }
-        }),
-        delay(3000)
+        })
       )
       .subscribe((response) => {
         if (response && response.status === 201) {
-          this.messages().get(chatId)?.set(response.body!._id, response.body!);
-          this.messagesFlatten.set(response.body!._id, {
+          const autoResponse = response.body!;
+          autoResponse.internalId = autoResponse._id;
+
+          this.messages()
+            .get(chatId)
+            ?.set(autoResponse.internalId, autoResponse);
+          this.messagesFlatten.set(autoResponse.internalId, {
             chatId,
-            message: response.body!,
+            message: autoResponse,
           });
 
           if (chat) {
-            chat.lastMessage = response.body!;
+            chat.lastMessage = autoResponse;
           }
+
+          this.toastsService.showToast(
+            'new-message',
+            autoResponse.content,
+            10000,
+            autoResponse.senderPicture,
+            `${autoResponse.sender.firstName} ${autoResponse.sender.lastName}`,
+            chatId
+          );
         }
       });
   }

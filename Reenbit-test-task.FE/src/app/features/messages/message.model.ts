@@ -3,6 +3,7 @@ import { Chat } from '../chats/chat.model';
 
 export interface Message {
   _id: string;
+  internalId: string;
   sender: User;
   senderPicture: string;
   chat: Chat;

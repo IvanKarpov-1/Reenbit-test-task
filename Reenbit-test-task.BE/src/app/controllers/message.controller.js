@@ -11,6 +11,7 @@ export const getMessages = async (req, res) => {
 
   const messages = await Message.find({ chat: chatId })
     .populate('sender')
+    .sort({ createdAt: 1 })
     .exec();
 
   return res.status(200).json(messages);
