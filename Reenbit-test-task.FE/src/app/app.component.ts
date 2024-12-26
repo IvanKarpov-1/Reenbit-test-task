@@ -9,6 +9,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { User } from './features/user/user.model';
 import { filter } from 'rxjs';
 import { ModalComponent } from './shared/components/modal/modal.component';
+import { ToasterComponent } from './shared/components/toast/toaster/toaster.component';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ import { ModalComponent } from './shared/components/modal/modal.component';
     MainContentComponent,
     NgStyle,
     ModalComponent,
+    ToasterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

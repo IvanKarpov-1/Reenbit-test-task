@@ -1,0 +1,37 @@
+<div [ngClass]="toast().type" class="toast-container">
+  <button (click)="close()" class="toast-close-button">
+    <svg
+      class="size-6"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 18 18 6M6 6l12 12"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+
+  @if (toast().type === 'new-message') {
+    <a class="new-message-container" [routerLink]="['/', toast().params![2]]">
+      <small>You have a new message</small>
+      <div class="new-message-container-content">
+        <app-profile-picture
+          style="flex-shrink: 0"
+          [picture]="toast().params![0]"
+          [size]="2"
+        ></app-profile-picture>
+        <div class="new-message-text">
+          <span class="toast-message sender">{{ toast().params![1] }}</span>
+          <p class="toast-message">{{ toast().message }}</p>
+        </div>
+      </div>
+    </a>
+  } @else {
+    <span class="toast-message">{{ toast().message }}</span>
+  }
+</div>

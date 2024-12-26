@@ -1,0 +1,107 @@
+.info {
+  --toast-border-color: var(--surface-0);
+  --toast-background-color: var(--mantle);
+  --toast-heading-text-color: var(--text);
+  --toast-text-color: var(--text);
+}
+
+.success {
+  --toast-border-color: var(--success);
+  --toast-background-color: color-mix(in srgb, var(--success) 5%, var(--mantle));
+  --toast-heading-text-color: var(--text);
+  --toast-text-color: var(--text);
+}
+
+.error {
+  --toast-border-color: var(--error);
+  --toast-background-color: color-mix(in srgb, var(--error) 5%, var(--mantle));
+  --toast-heading-text-color: var(--text);
+  --toast-text-color: var(--text);
+}
+
+.warning {
+  --toast-border-color: var(--warning);
+  --toast-background-color: color-mix(in srgb, var(--warning) 5%, var(--mantle));
+  --toast-heading-text-color: var(--text);
+  --toast-text-color: var(--text);
+}
+
+.new-message {
+  --toast-border-color: var(--surface-0);
+  --toast-background-color: var(--mantle);
+  --toast-heading-text-color: var(--text);
+  --toast-text-color: var(--text);
+}
+
+.toast-container {
+  position: relative;
+  display: inline-flex;
+  pointer-events: auto;
+  max-height: 7rem;
+  max-width: 25rem;
+  min-width: 10rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.5rem;
+  border: 1px solid var(--toast-border-color);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+  background-color: var(--toast-background-color);
+}
+
+.toast-close-button {
+  position: absolute;
+  top: 0.1rem;
+  right: 0.1rem;
+}
+
+.toast-close-button svg {
+  stroke: var(--toast-text-color);
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: stroke 150ms ease;
+}
+
+.toast-close-button svg:hover {
+  stroke: var(--error);
+}
+
+.toast-message {
+  color: var(--toast-text-color);
+}
+
+.new-message-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.new-message-container-content {
+  overflow: hidden;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.new-message-text {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.toast-message {
+  flex-shrink: 0;
+}
+
+.new-message-text .toast-message.sender {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.new-message-text .toast-message {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

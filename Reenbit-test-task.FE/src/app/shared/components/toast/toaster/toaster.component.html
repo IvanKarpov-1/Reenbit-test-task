@@ -1,0 +1,5 @@
+<div class="toasts-container">
+  @for (toast of toasts(); track toast.id) {
+    <app-toast [toast]="toast"></app-toast>
+  }
+</div>

@@ -5,6 +5,7 @@ import { Message } from '../message.model';
 import { ChatsService } from '../../chats/chats.service';
 import { UserService } from '../../user/user.service';
 import { delay, of, switchMap, tap } from 'rxjs';
+import { ToastsService } from '../../../shared/components/toast/toasts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -121,6 +122,11 @@ export class MessagesService {
             if (chatLastMessageChangeIndex) {
               this.modifierService.restore(chatLastMessageChangeIndex);
             }
+
+            this.toastsService.showToast(
+              'error',
+              'An error occurred while creating the message'
+            );
           }
         }),
         delay(3000),
@@ -193,6 +199,11 @@ export class MessagesService {
         if (response.status !== 200) {
           this.modifierService.restore(messageUpdatedAtChangeIndex);
           this.modifierService.restore(messageContentChangeIndex);
+        } else {
+          this.toastsService.showToast(
+            'error',
+            'An error occurred while updating the message'
+          );
         }
       });
   }
@@ -209,6 +220,11 @@ export class MessagesService {
           }
 
           this.messagesFlatten.delete(messageId);
+        } else {
+          this.toastsService.showToast(
+            'error',
+            'An error occurred while removing the chat'
+          );
         }
       });
   }

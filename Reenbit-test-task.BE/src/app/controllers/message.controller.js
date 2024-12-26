@@ -69,7 +69,18 @@ export const createAutoResponseMessage = async (req, res) => {
 
   await chat.save();
 
-  return res.status(201).json(autoResponse);
+  return res.status(201).json({
+    _id: autoResponse._id,
+    senderPicture: chat.virtualUser.profilePicture,
+    sender: {
+      firstName: chat.virtualUser.firstName,
+      lastName: chat.virtualUser.lastName,
+    },
+    chat: chatId,
+    content: randomQuoteData.data.quote,
+    isAutoResponse: true,
+    createdAt: autoResponse.createdAt,
+  });
 };
 
 export const updateMessage = async (req, res) => {

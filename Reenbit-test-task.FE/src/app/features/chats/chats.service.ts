@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Chat } from './chat.model';
 import { of, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastsService } from '../../shared/components/toast/toasts.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,7 @@ export class ChatsService {
   currentChat = this._currentChat.asReadonly();
   private searchTerm: string | undefined;
   private readonly router = inject(Router);
+  private readonly toastsService = inject(ToastsService);
 
   getChats() {
     this.http.get<Chat[]>('api/chats').subscribe((chats) =>
@@ -79,6 +81,11 @@ export class ChatsService {
             if (this._currentChat()?._id === response.body._id) {
               this._currentChat.set(response.body);
             }
+          } else {
+            this.toastsService.showToast(
+              'error',
+              'An error occurred while updating the chat'
+            );
           }
         })
       );
@@ -96,6 +103,11 @@ export class ChatsService {
             if (this._currentChat()?._id === chatId) {
               this.router.navigate(['/']);
             }
+          } else {
+            this.toastsService.showToast(
+              'error',
+              'An error occurred while deleting the chat'
+            );
           }
         })
       );
