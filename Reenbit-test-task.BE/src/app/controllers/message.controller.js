@@ -56,8 +56,6 @@ export const createAutoResponseMessage = async (req, res) => {
   const randomQuote = await fetch('https://stoic.tekloon.net/stoic-quote');
   const randomQuoteData = await randomQuote.json();
 
-  console.log(randomQuoteData);
-
   const autoResponse = await Message.create({
     senderPicture: chat.virtualUser.profilePicture,
     chat: chatId,
