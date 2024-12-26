@@ -9,6 +9,7 @@ export const getChats = async (req, res) => {
   const chats = await Chat.find({ 'participants.user': userId })
     .populate('participants.user', 'firstName lastName profilePicture')
     .populate('lastMessage')
+    .sort({ lastMessage: -1 })
     .exec();
 
   return res.status(200).json(chats);

@@ -9,7 +9,7 @@
     <div class="info-row">
       <span class="user-name">{{ chat() | chatName }}</span>
       <span class="last-update-date">{{
-        chat().updatedAt | recencyDate: 'medium'
+        chat().lastMessage?.createdAt | recencyDate: 'medium'
       }}</span>
     </div>
     <div class="subtitle">

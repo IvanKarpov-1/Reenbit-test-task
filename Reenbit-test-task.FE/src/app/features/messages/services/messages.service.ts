@@ -90,6 +90,8 @@ export class MessagesService {
         // @ts-ignore
         { content: content }
       );
+
+      this.chatsService.sortChats();
     }
 
     if (!this.messages().has(chatId)) {
@@ -122,6 +124,8 @@ export class MessagesService {
             if (chatLastMessageChangeIndex) {
               this.modifierService.restore(chatLastMessageChangeIndex);
             }
+
+            this.chatsService.sortChats();
 
             this.toastsService.showToast(
               'error',
@@ -158,6 +162,8 @@ export class MessagesService {
           if (chat) {
             chat.lastMessage = autoResponse;
           }
+
+          this.chatsService.sortChats();
 
           this.toastsService.showToast(
             'new-message',

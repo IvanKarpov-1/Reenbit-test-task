@@ -25,10 +25,12 @@ export class RecencyDatePipe implements PipeTransform {
   ) {}
 
   transform(
-    value: Date | string | number,
+    value: Date | string | number | undefined,
     timezone?: string,
     locale?: string
   ): string | null {
+    if (!value) return '';
+
     const date = new Date(value);
     const now = new Date();
 

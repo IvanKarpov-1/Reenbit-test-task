@@ -26,6 +26,8 @@ export class ChatsService {
       chats.forEach((chat) => {
         this._chats().set(chat._id, chat);
         this.filteredChats().set(chat._id, chat);
+
+        this.sortChats();
       })
     );
   }
@@ -38,6 +40,8 @@ export class ChatsService {
             tap((chat) => {
               this._chats().set(chat._id, chat);
               this.filteredChats().set(chat._id, chat);
+
+              this.sortChats();
             })
           )
     ).pipe(tap((chat) => this._currentChat.set(chat)));
@@ -135,5 +139,23 @@ export class ChatsService {
         this.filteredChats().set(chat._id, chat);
       }
     });
+  }
+
+  sortChats() {
+    const chatsMap = new Map(this.filteredChats());
+
+    const sortedChatsArray = Array.from(chatsMap.entries()).sort(
+      ([, chatA], [, chatB]) => {
+        const dateA = chatA.lastMessage?.createdAt
+          ? new Date(chatA.lastMessage.createdAt).getTime()
+          : 0;
+        const dateB = chatB.lastMessage?.createdAt
+          ? new Date(chatB.lastMessage.createdAt).getTime()
+          : 0;
+        return dateB - dateA;
+      }
+    );
+
+    this.filteredChats.set(new Map(sortedChatsArray));
   }
 }
