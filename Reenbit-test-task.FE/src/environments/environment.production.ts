@@ -1,4 +1,5 @@
 export const environment = {
+  // production: true,
   apiBaseUrl: import.meta.env.NG_APP_API_SERVER_URL,
   auth0: {
     domain: import.meta.env.NG_APP_AUTH0_DOMAIN,
