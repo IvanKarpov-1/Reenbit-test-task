@@ -19,6 +19,8 @@ export class DropdownComponent {
   isDropdownOpen = output<boolean>();
   isOpen = signal<boolean>(false);
   closeOnClickInside = input<boolean>(false);
+  isShowActivatorButtonOnOuterHover = input<boolean>(false);
+  outerHoveringState = input<boolean>(false);
 
   private readonly activator =
     viewChild.required<ElementRef>('dropdownActivator');

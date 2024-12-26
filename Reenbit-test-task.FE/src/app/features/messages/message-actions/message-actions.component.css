@@ -1,0 +1,57 @@
+:host {
+  font-size: 0;
+}
+
+.activator-button {
+  display: flex;
+  border-radius: 9999px;
+  transition: background-color 150ms ease;
+}
+
+.activator-button:hover {
+  background-color: var(--surface-0);
+}
+
+.activator-svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.actions-list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--crust);
+  margin-top: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--surface-0);
+  font-size: 1rem;
+  right: 0;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.action-button {
+  padding: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  transition: background-color 150ms ease;
+}
+
+.action-button:hover {
+  background-color: var(--surface-0);
+}
+
+.action-button-svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.action-button-text {
+  margin-top: 0.2rem;
+}
+
+.action-button.remove {
+  color: var(--error);
+  stroke: var(--error);
+}

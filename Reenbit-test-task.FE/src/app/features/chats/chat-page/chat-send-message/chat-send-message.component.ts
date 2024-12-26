@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   DestroyRef,
+  effect,
   ElementRef,
   inject,
   OnInit,
@@ -16,7 +17,8 @@ import {
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MessagesService } from '../../../messages/messages.service';
+import { MessagesService } from '../../../messages/services/messages.service';
+import { MessageEditService } from '../../../messages/services/message-edit.service';
 
 @Component({
   selector: 'app-chat-send-message',
@@ -26,11 +28,22 @@ import { MessagesService } from '../../../messages/messages.service';
 })
 export class ChatSendMessageComponent implements OnInit, AfterViewInit {
   messageForm = new FormGroup({
-    message: new FormControl('', [Validators.required]),
+    message: new FormControl<string | undefined>('', [Validators.required]),
   });
   private readonly messagesService = inject(MessagesService);
   private readonly elementRef = viewChild.required<ElementRef>('messageArea');
   private readonly destroyRef = inject(DestroyRef);
+  private readonly messageEditService = inject(MessageEditService);
+  readonly isEditing = this.messageEditService.isEditing;
+  private readonly messageToEdit = this.messageEditService.message;
+
+  constructor() {
+    effect(() => {
+      if (this.isEditing()) {
+        this.message.setValue(this.messageToEdit()?.content);
+      }
+    });
+  }
 
   get message() {
     return this.messageForm.controls.message;
@@ -47,8 +60,22 @@ export class ChatSendMessageComponent implements OnInit, AfterViewInit {
   }
 
   onSend() {
-    this.messagesService.createMessage(this.message.value!);
+    if (!this.isEditing()) {
+      this.messagesService.createMessage(this.message.value!);
+    } else {
+      this.messagesService.updateMessage(
+        this.messageToEdit()?._id!,
+        this.message.value!
+      );
+      this.messageEditService.endEdit();
+    }
+
     this.messageForm.reset();
+  }
+
+  onReset() {
+    this.messageForm.reset();
+    this.messageEditService.endEdit();
   }
 
   resize() {

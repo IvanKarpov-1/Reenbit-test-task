@@ -8,7 +8,7 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { MessageComponent } from '../message/message.component';
-import { MessagesService } from '../messages.service';
+import { MessagesService } from '../services/messages.service';
 import { UserService } from '../../user/user.service';
 import { ChatsService } from '../../chats/chats.service';
 

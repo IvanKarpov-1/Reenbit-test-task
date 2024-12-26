@@ -71,6 +71,49 @@ export const createAutoResponseMessage = async (req, res) => {
   return res.status(201).json(autoResponse);
 };
 
+export const updateMessage = async (req, res) => {
+  const userId = getSubFromJwt(req.auth);
+
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+  const messageId = req.params.messageId;
+  const content = req.body.content;
+
+  const message = await Message.findById(messageId).exec();
+
+  if (message.sender !== userId) {
+    return res
+      .status(403)
+      .json({ error: 'You can edit only your own message' });
+  }
+
+  message.content = content;
+  await message.save();
+
+  return res.status(200).json({ message: 'Message was successfully updated' });
+};
+
+export const deleteMessage = async (req, res) => {
+  const userId = getSubFromJwt(req.auth);
+
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+  const messageId = req.params.messageId;
+
+  const result = await Message.deleteOne({
+    _id: messageId,
+    sender: userId,
+  }).exec();
+
+  return result.deletedCount === 0
+    ? res
+        .status(404)
+        .json({ error: 'Message not found', details: error.errors })
+    : res
+        .status(204)
+        .json({ message: 'Message has been successfully deleted' });
+};
+
 const doChecks = async (req) => {
   const userId = getSubFromJwt(req.auth);
 

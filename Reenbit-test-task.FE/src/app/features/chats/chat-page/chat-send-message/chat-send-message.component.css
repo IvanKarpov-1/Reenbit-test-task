@@ -8,7 +8,7 @@
   width: 100%;
   background-color: var(--base);
   color: var(--text);
-  padding: 0.25rem 2.5rem 0.25rem 0.75rem;
+  padding: 0.25rem 4.5rem 0.25rem 0.75rem;
   outline: 2px solid var(--message-area-outline-color);
   border-radius: 1rem;
   border: 1px solid var(--surface-2);
@@ -50,7 +50,7 @@
   transition: stroke, fill 150ms ease;
 }
 
-.message-area-send-button {
+.message-area-button {
   pointer-events: none;
   cursor: none;
   opacity: 0;
@@ -60,13 +60,29 @@
   transition: opacity 150ms ease;
 }
 
-.message-area-send-button.message-area-with-content {
+.message-area-button.message-area-with-content {
   pointer-events: auto;
   cursor: pointer;
   opacity: 100%;
 }
 
-.message-area-send-button.message-area-with-content .send-icon {
+.message-area-button.message-area-with-content .reset-icon {
+  --message-area-icon-stroke-color: var(--text);
+  --message-area-icon-fill-color: transparent;
+}
+
+.message-area-button.message-area-with-content .reset-icon:hover {
+  --message-area-icon-stroke-color: var(--error);
+  --message-area-icon-fill-color: transparent;
+}
+
+.message-area-button.message-area-with-content .send-icon {
   --message-area-icon-stroke-color: var(--base);
   --message-area-icon-fill-color: var(--accent-1);
 }
+
+.message-area-button.message-area-with-content .edit-icon {
+  --message-area-icon-stroke-color: var(--accent-1);
+  --message-area-icon-fill-color: transparent;
+}
+

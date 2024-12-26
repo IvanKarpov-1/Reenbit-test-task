@@ -2,11 +2,30 @@
   transition: opacity, transform, 150ms ease;
 }
 
+.activator-btn {
+  --activator-btn-opacity: 1;
+  --activator-btn-pointer-event: auto;
+
+  opacity: var(--activator-btn-opacity);
+  pointer-events: var(--activator-btn-pointer-event);
+  transition: opacity 150ms ease;
+}
+
+.activator-btn.outerIsHovering {
+  --activator-btn-opacity: 1;
+  --activator-btn-pointer-event: auto;
+}
+
+.activator-btn.outerIsNotHovering {
+  --activator-btn-opacity: 0;
+  --activator-btn-pointer-event: none;
+}
+
 .dropdown-open {
   pointer-events: auto;
   user-select: auto;
   transform: translateY(0);
-  opacity: 100;
+  opacity: 1;
 }
 
 .dropdown-close {

@@ -10,6 +10,15 @@
   <div class="message-content">
     <div class="message-text">
       <span>{{ message().content }}</span>
+      @if (isOwn()) {
+        <app-message-actions
+          [message]="message()"
+          [isShowActivatorButtonOnOuterHover]="true"
+          [outerHoveringState]="outerHoveringState()"
+          class="message-actions"
+        >
+        </app-message-actions>
+      }
     </div>
     <small class="message-timestamp">{{
       message().createdAt | date: 'short'

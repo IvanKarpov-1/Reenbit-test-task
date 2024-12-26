@@ -37,8 +37,15 @@
   background-color: var(--message-text-background-color);
   color: var(--message-text-text-color);
 
+  display: flex;
+  justify-content: space-between;
+
   padding: 0.5rem 1rem;
   border-radius: 1.5rem;
+}
+
+.message-actions {
+  margin-right: -0.5rem;
 }
 
 .message-timestamp {

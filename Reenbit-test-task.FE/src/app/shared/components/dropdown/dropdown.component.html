@@ -1,5 +1,15 @@
 <div class="relative">
-  <button #dropdownActivator (click)="toggleDropdown()" type="button">
+  <button
+    #dropdownActivator
+    (click)="toggleDropdown()"
+    [ngClass]="
+      isShowActivatorButtonOnOuterHover() && outerHoveringState()
+        ? 'outerIsHovering'
+        : 'outerIsNotHovering'
+    "
+    class="activator-btn"
+    type="button"
+  >
     <ng-content select="activator-btn-content"></ng-content>
   </button>
 
