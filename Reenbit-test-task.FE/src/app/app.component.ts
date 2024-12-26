@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.auth.user$
       .pipe(
-        filter((user) => user === null || user !== undefined),
+        filter((user) => user !== null && user !== undefined),
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((user) => {
