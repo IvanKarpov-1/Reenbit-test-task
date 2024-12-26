@@ -3,6 +3,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { debounceTime, tap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ChatsService } from '../chats.service';
 
 @Component({
   selector: 'app-chat-search',
@@ -13,6 +14,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ChatSearchComponent implements OnInit {
   searchTerm = new FormControl('', { nonNullable: true });
   isLoading = signal<boolean>(false);
+  private readonly chatsService = inject(ChatsService);
   private readonly destroyRef = inject(DestroyRef);
 
   ngOnInit() {
@@ -22,10 +24,14 @@ export class ChatSearchComponent implements OnInit {
         tap(() => this.isLoading.set(true)),
         takeUntilDestroyed(this.destroyRef)
       )
-      .subscribe(() => this.isLoading.set(false));
+      .subscribe((searchTerm) => {
+        this.chatsService.searchChat(searchTerm);
+        this.isLoading.set(false);
+      });
   }
 
   reset() {
     this.searchTerm.reset();
+    this.chatsService.searchChat(undefined);
   }
 }

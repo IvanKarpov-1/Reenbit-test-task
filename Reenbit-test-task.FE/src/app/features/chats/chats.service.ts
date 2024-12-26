@@ -10,33 +10,49 @@ import { Router } from '@angular/router';
 export class ChatsService {
   private readonly http = inject(HttpClient);
   private readonly _chats = signal<Map<string, Chat>>(new Map<string, Chat>());
-  chats = this._chats.asReadonly();
+  private readonly filteredChats = signal<Map<string, Chat>>(
+    new Map<string, Chat>()
+  );
+  chats = this.filteredChats.asReadonly();
   private readonly _currentChat = signal<Chat | undefined>(undefined);
   currentChat = this._currentChat.asReadonly();
+  private searchTerm: string | undefined;
   private readonly router = inject(Router);
 
   getChats() {
-    this.http
-      .get<Chat[]>('api/chats')
-      .subscribe((chats) =>
-        chats.forEach((chat) => this.chats().set(chat._id, chat))
-      );
+    this.http.get<Chat[]>('api/chats').subscribe((chats) =>
+      chats.forEach((chat) => {
+        this._chats().set(chat._id, chat);
+        this.filteredChats().set(chat._id, chat);
+      })
+    );
   }
 
   getChat(chatId: string) {
     return (
-      this.chats().has(chatId)
-        ? of(this.chats().get(chatId))
-        : this.http
-            .get<Chat>(`api/chats/${chatId}`)
-            .pipe(tap((chat) => this.chats().set(chat._id, chat)))
+      this._chats().has(chatId)
+        ? of(this._chats().get(chatId))
+        : this.http.get<Chat>(`api/chats/${chatId}`).pipe(
+            tap((chat) => {
+              this._chats().set(chat._id, chat);
+              this.filteredChats().set(chat._id, chat);
+            })
+          )
     ).pipe(tap((chat) => this._currentChat.set(chat)));
   }
 
   createChat(firstName: string, lastName: string) {
     return this.http
       .post<Chat>('api/chats', { firstName: firstName, lastName: lastName })
-      .pipe(tap((chat) => this.chats().set(chat._id, chat)));
+      .pipe(
+        tap((chat) => {
+          this._chats().set(chat._id, chat);
+
+          if (!this.searchTerm) {
+            this.filteredChats().set(chat._id, chat);
+          }
+        })
+      );
   }
 
   updateChat(
@@ -48,13 +64,17 @@ export class ChatsService {
     return this.http
       .put<Chat>(
         `api/chats/${chatId}`,
-        { firstName: firstName, lastName: lastName, name },
+        { firstName: firstName, lastName: lastName, name: name },
         { observe: 'response' }
       )
       .pipe(
         tap((response) => {
           if (response.status === 200 && response.body) {
-            this.chats().set(response.body._id, response.body);
+            this._chats().set(response.body._id, response.body);
+
+            if (!this.searchTerm) {
+              this.filteredChats().set(response.body._id, response.body);
+            }
 
             if (this._currentChat()?._id === response.body._id) {
               this._currentChat.set(response.body);
@@ -70,7 +90,8 @@ export class ChatsService {
       .pipe(
         tap((response) => {
           if (response.status === 204) {
-            this.chats().delete(chatId);
+            this._chats().delete(chatId);
+            this.filteredChats().delete(chatId);
 
             if (this._currentChat()?._id === chatId) {
               this.router.navigate(['/']);
@@ -78,5 +99,29 @@ export class ChatsService {
           }
         })
       );
+  }
+
+  searchChat(searchTerm: string | undefined) {
+    this.searchTerm = searchTerm;
+
+    if (!searchTerm) {
+      this.filteredChats.set(this._chats());
+      return;
+    }
+
+    this.filteredChats().clear();
+
+    searchTerm = searchTerm!.toLowerCase();
+
+    this._chats().forEach((chat) => {
+      if (
+        chat.name?.toLowerCase().includes(searchTerm!) ||
+        chat.virtualUser?.firstName.toLowerCase().includes(searchTerm!) ||
+        chat.virtualUser?.lastName.toLowerCase().includes(searchTerm!)
+      ) {
+        console.log('Match');
+        this.filteredChats().set(chat._id, chat);
+      }
+    });
   }
 }
