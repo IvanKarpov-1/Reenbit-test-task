@@ -205,7 +205,6 @@ export class MessagesService {
         if (response.status !== 200) {
           this.modifierService.restore(messageUpdatedAtChangeIndex);
           this.modifierService.restore(messageContentChangeIndex);
-        } else {
           this.toastsService.showToast(
             'error',
             'An error occurred while updating the message'
