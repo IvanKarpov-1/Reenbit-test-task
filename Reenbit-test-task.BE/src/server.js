@@ -3,12 +3,14 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
-
-import routes from './app/routes/index.js';
 import { auth } from 'express-oauth2-jwt-bearer';
+import routes from './app/routes/index.js';
+import helmet from 'helmet';
 
 const app = express();
 
+app.disable('x-powered-by');
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
