@@ -5,17 +5,23 @@ import {
   runInInjectionContext,
 } from '@angular/core';
 import { authHttpInterceptorFn, AuthService } from '@auth0/auth0-angular';
-import { switchMap, take } from 'rxjs';
+import { EMPTY, switchMap, take } from 'rxjs';
+import { ToastsService } from '../../shared/components/toast/toasts.service';
 
 export const authHttpInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const environmentInjector = inject(EnvironmentInjector);
+  const toastsService = inject(ToastsService);
 
   return authService.isAuthenticated$.pipe(
     take(1),
     switchMap((isAuthenticated) => {
       if (!isAuthenticated) {
-        return blankInterceptor(req, next);
+        toastsService.showToast(
+          'error',
+          'You must authenticate to perform this action'
+        );
+        return EMPTY;
       }
 
       return runInInjectionContext(environmentInjector, () => {
@@ -24,5 +30,3 @@ export const authHttpInterceptor: HttpInterceptorFn = (req, next) => {
     })
   );
 };
-
-const blankInterceptor: HttpInterceptorFn = (req, next) => next(req);
