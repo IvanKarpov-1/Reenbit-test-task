@@ -247,10 +247,6 @@ export class MessagesService {
     const chatId = message.chat._id;
     const chat = this.chatsService.chats().get(chatId);
 
-    console.log('Chats: ', this.chatsService.chats());
-    console.log('Chat: ', chat);
-    console.log('chatId: ', chatId);
-
     this.messages().get(chatId)?.set(message.internalId, message);
     this.messagesFlatten.set(message.internalId, {
       chatId,
