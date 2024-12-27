@@ -1,5 +1,6 @@
 :host {
   font-size: 0;
+  z-index: 10;
 }
 
 .activator-button {
