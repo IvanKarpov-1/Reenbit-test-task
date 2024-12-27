@@ -6,6 +6,7 @@ import { ChatsService } from '../../chats/chats.service';
 import { UserService } from '../../user/user.service';
 import { delay, of, switchMap, tap } from 'rxjs';
 import { ToastsService } from '../../../shared/components/toast/toasts.service';
+import { CustomSocketService } from '../../../core/services/custom-socket.service';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,13 @@ export class MessagesService {
   private readonly http = inject(HttpClient);
   private readonly modifierService = inject(ValuesModifierService);
   private readonly toastsService = inject(ToastsService);
+  private readonly io = inject(CustomSocketService);
+
+  constructor() {
+    this.io.on('receiveMessage', (message: Message) => {
+      this.onReceiveMessage(message);
+    });
+  }
 
   getMessages(chatId?: string) {
     chatId = chatId ?? this.currentChat()?._id;
@@ -232,6 +240,37 @@ export class MessagesService {
           );
         }
       });
+  }
+
+  private onReceiveMessage(message: Message) {
+    message.internalId = message._id;
+    const chatId = message.chat._id;
+    const chat = this.chatsService.chats().get(chatId);
+
+    console.log('Chats: ', this.chatsService.chats());
+    console.log('Chat: ', chat);
+    console.log('chatId: ', chatId);
+
+    this.messages().get(chatId)?.set(message.internalId, message);
+    this.messagesFlatten.set(message.internalId, {
+      chatId,
+      message: message,
+    });
+
+    if (chat) {
+      chat.lastMessage = message;
+    }
+
+    this.chatsService.sortChats();
+
+    this.toastsService.showToast(
+      'new-message',
+      message.content,
+      10000,
+      message.senderPicture,
+      `${message.sender.firstName} ${message.sender.lastName}`,
+      chatId
+    );
   }
 
   private getRandomId() {

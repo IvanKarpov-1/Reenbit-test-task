@@ -4,8 +4,11 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import cors from 'cors';
 import { auth } from 'express-oauth2-jwt-bearer';
-import routes from './app/routes/index.js';
 import helmet from 'helmet';
+import http from 'http';
+
+import routes from './app/routes/index.js';
+import initializeSocket from './app/sockets/index.socket.js';
 
 const app = express();
 
@@ -23,8 +26,8 @@ app.use(
 );
 
 const checkJwt = auth({
+  issuerBaseURL: `https://${process.env.AUTH0_ISSUER_BASE_URL}`,
   audience: process.env.AUTH0_AUDIENCE,
-  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
 });
 
 app.use(checkJwt);
@@ -35,4 +38,8 @@ app.use((req, res, next) => {
   next(createError(404));
 });
 
-export default app;
+const server = http.createServer(app);
+
+initializeSocket(server);
+
+export { app, server };

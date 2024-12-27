@@ -10,6 +10,8 @@ import { User } from './features/user/user.model';
 import { filter } from 'rxjs';
 import { ModalComponent } from './shared/components/modal/modal.component';
 import { ToasterComponent } from './shared/components/toast/toaster/toaster.component';
+import { CustomSocketService } from './core/services/custom-socket.service';
+import { MessagesService } from './features/messages/services/messages.service';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +31,8 @@ export class AppComponent implements OnInit {
   private readonly auth = inject(AuthService);
   private readonly userService = inject(UserService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly io = inject(CustomSocketService);
+  private readonly messagesService = inject(MessagesService);
 
   ngOnInit() {
     this.auth.user$
@@ -59,6 +63,12 @@ export class AppComponent implements OnInit {
           lastLogin: '',
         };
         this.userService.login(appUser);
+
+        this.io.connect();
+
+        this.io.on('connect_error', (err: any) => {
+          console.log(`connect_error due to ${err.message}`);
+        });
       });
   }
 
