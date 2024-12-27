@@ -10,7 +10,7 @@ export const loginUser = async (req, res) => {
 
     const { firstName, lastName, profilePicture, updatedAt } = req.body;
 
-    let user = await User.findById(userId);
+    let user = await User.findById(userId).populate('settings');
 
     if (user) {
       user.lastLogin = Date.now();
@@ -22,7 +22,7 @@ export const loginUser = async (req, res) => {
       }
 
       await user.save();
-      return res.status(200).json({ message: 'User info updated' });
+      return res.status(200).json(user);
     } else {
       await User.create({
         _id: userId,
@@ -35,11 +35,34 @@ export const loginUser = async (req, res) => {
 
       await createPredefinedChats(userId);
 
-      return res.status(201).json({ message: 'User created' });
+      return res.status(201).json(user);
     }
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
+};
+
+export const changeUserSettings = async (req, res) => {
+  const userId = getSubFromJwt(req.auth);
+
+  if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+
+  const { settingName, value } = req.body;
+
+  let user = await User.findById(userId);
+
+  const allowedSettings = ['isSendRandomAutomaticMessages'];
+
+  if (!allowedSettings.includes(settingName)) {
+    return res.status(400).json({ error: 'Invalid setting name' });
+  }
+
+  if (user.settings[settingName] !== value) {
+    user.settings[settingName] = value;
+  }
+
+  await user.save();
+  return res.status(200).json({ message: 'User settings updated' });
 };
 
 const createPredefinedChats = async (userId) => {

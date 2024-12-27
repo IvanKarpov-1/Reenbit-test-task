@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema({
     type: Date,
   },
   lastLogin: Date,
+  settings: {
+    isSendRandomAutomaticMessages: {
+      type: Boolean,
+      default: true,
+    },
+  },
 });
 
 const User = mongoose.model('User', userSchema);

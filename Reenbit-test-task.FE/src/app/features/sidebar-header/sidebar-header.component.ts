@@ -1,20 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { AsyncPipe } from '@angular/common';
 import { LoginButtonComponent } from '../../shared/components/buttons/login-button/login-button.component';
-import { LogoutButtonComponent } from '../../shared/components/buttons/logout-button/logout-button.component';
 import { AuthService } from '@auth0/auth0-angular';
 import { ChatSearchComponent } from '../chats/chat-search/chat-search.component';
 import { ProfilePictureComponent } from '../../shared/components/profile-picture/profile-picture.component';
 import { ModalService } from '../../shared/components/modal/modal.service';
+import { UserActionsComponent } from '../user/user-actions/user-actions.component';
 
 @Component({
   selector: 'app-sidebar-header',
   imports: [
     AsyncPipe,
     LoginButtonComponent,
-    LogoutButtonComponent,
     ChatSearchComponent,
     ProfilePictureComponent,
+    UserActionsComponent,
   ],
   templateUrl: './sidebar-header.component.html',
   styleUrl: './sidebar-header.component.css',

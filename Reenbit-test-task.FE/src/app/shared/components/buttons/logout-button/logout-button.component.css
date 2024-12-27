@@ -1,15 +1,11 @@
 :host {
   color: var(--text);
   font-weight: bold;
-  padding: 0.25rem 0.5rem;
-  text-align: center;
+  width: 90%;
+  height: 100%;
+  text-align: left;
   word-wrap: normal;
   cursor: pointer;
-  height: 100%;
 
   transition: color 150ms ease;
-}
-
-:host:hover {
-  color: var(--subtext-1);
 }
