@@ -83,7 +83,7 @@ export class MessagesService {
       internalId: randomMessageId,
       sender: { _id: this.userId()! },
       content: content,
-      createdAt: Date.now().toString(),
+      createdAt: new Date(Date.now()),
       isAutoResponse: false,
     };
 
@@ -96,7 +96,7 @@ export class MessagesService {
         chat,
         'lastMessage',
         // @ts-ignore
-        { content: content }
+        { content: content, createdAt: new Date(Date.now()) }
       );
 
       this.chatsService.sortChats();
