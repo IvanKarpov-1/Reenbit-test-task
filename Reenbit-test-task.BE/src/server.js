@@ -30,9 +30,8 @@ const checkJwt = auth({
   audience: process.env.AUTH0_AUDIENCE,
 });
 
-app.use(checkJwt);
-
-app.use('/api', routes);
+app.use('/', (req, res) => res.status(200).send('Ok'));
+app.use('/api', checkJwt, routes);
 
 app.use((req, res, next) => {
   next(createError(404));
