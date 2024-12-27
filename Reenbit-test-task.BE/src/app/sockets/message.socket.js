@@ -29,7 +29,7 @@ setInterval(async () => {
     .select('settings.isSendRandomAutomaticMessages')
     .exec();
 
-  if (!user.settings.isSendRandomAutomaticMessages) {
+  if (!user || !user.settings || !user.settings.isSendRandomAutomaticMessages) {
     return;
   }
 
